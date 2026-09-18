@@ -378,10 +378,6 @@ footer strong{
 
 <body>
 
-<!-- =========================
-     CABEÇALHO
-========================= -->
-
 <header>
   <div class="marca">
     <img
@@ -391,12 +387,7 @@ footer strong{
   </div>
 </header>
 
-
 <main class="container">
-
-  <!-- =========================
-       TÍTULO
-  ========================= -->
 
   <div class="titulo">
     <h2>Monte seu bolo</h2>
@@ -435,7 +426,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="radio"
@@ -451,7 +441,6 @@ footer strong{
           <span class="preco">R$ 195,00</span>
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -469,7 +458,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="radio"
@@ -485,7 +473,6 @@ footer strong{
           <span class="preco">R$ 240,00</span>
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -533,7 +520,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="radio"
@@ -576,7 +562,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="checkbox"
@@ -591,7 +576,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="checkbox"
@@ -603,7 +587,6 @@ footer strong{
           🍫 Brigadeiro ao leite
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -617,7 +600,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="checkbox"
@@ -629,7 +611,6 @@ footer strong{
           🍫 Chocolate
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -643,7 +624,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="checkbox"
@@ -655,7 +635,6 @@ footer strong{
           🍰 Torta mineira
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -669,7 +648,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="checkbox"
@@ -681,7 +659,6 @@ footer strong{
           🥜 Amendoim
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -733,7 +710,6 @@ footer strong{
         </label>
       </div>
 
-
       <div class="opcao">
         <input
           type="radio"
@@ -746,7 +722,6 @@ footer strong{
           🍫 <strong>Ganache</strong>
         </label>
       </div>
-
 
       <div class="opcao">
         <input
@@ -788,7 +763,6 @@ footer strong{
           type="date"
         >
       </div>
-
 
       <div class="campo">
         <label for="horarioEntrega">
@@ -832,7 +806,6 @@ footer strong{
         >
       </div>
 
-
       <div class="campo">
         <label for="observacao">
           Observação
@@ -846,7 +819,6 @@ footer strong{
       </div>
 
     </div>
-
 
     <div class="info">
 
@@ -880,7 +852,6 @@ footer strong{
 
       </div>
 
-
       <div class="total">
 
         <small>Total</small>
@@ -892,7 +863,6 @@ footer strong{
       </div>
 
     </div>
-
 
     <button
       class="btn-whatsapp"
@@ -929,9 +899,6 @@ footer strong{
 
 const telefone = "5548988801553";
 
-/*
-   ENDEREÇO DA SUA IMPLANTAÇÃO DO GOOGLE APPS SCRIPT
-*/
 const URL_DA_PLANILHA =
 "https://script.google.com/macros/s/AKfycbxu3imiJZ0Xjo-zQa1-HZTU2WSEQMxmGbMZIqnt-6dcLWj-qS29DK8cbAdmMECyoMfb/exec";
 
@@ -1001,7 +968,6 @@ nomeCliente.addEventListener(
   }
 );
 
-
 observacao.addEventListener(
   "input",
   () => {
@@ -1015,7 +981,6 @@ observacao.addEventListener(
   }
 );
 
-
 dataEntrega.addEventListener(
   "input",
   () => {
@@ -1028,7 +993,6 @@ dataEntrega.addEventListener(
     atualizar();
   }
 );
-
 
 horarioEntrega.addEventListener(
   "input",
@@ -1155,12 +1119,10 @@ function obterPedido(){
     r => r.checked
   );
 
-
   let total =
   tamanho
   ? Number(tamanho.dataset.preco)
   : 0;
-
 
   recheiosSelecionados.forEach(
     r => {
@@ -1172,7 +1134,6 @@ function obterPedido(){
 
     }
   );
-
 
   return {
 
@@ -1283,10 +1244,6 @@ function atualizar(){
     dinheiro(pedido.total);
 
 
-  /* -----------------------------
-     AVISO DOS RECHEIOS
-  ----------------------------- */
-
   const aviso =
   document.getElementById(
     "avisoRecheios"
@@ -1314,10 +1271,6 @@ function atualizar(){
   }
 
 
-  /* -----------------------------
-     BOTÃO
-  ----------------------------- */
-
   btnWhatsApp.disabled =
 
     !pedido.tamanho ||
@@ -1335,6 +1288,55 @@ function atualizar(){
     !horarioEntrega.value ||
 
     !nomeCliente.value.trim();
+
+}
+
+
+/* =====================================================
+   LIMPA TODOS OS DADOS DO PEDIDO
+===================================================== */
+
+function limparPedido(){
+
+  /* Limpa campos */
+  nomeCliente.value = "";
+  observacao.value = "";
+  dataEntrega.value = "";
+  horarioEntrega.value = "";
+
+
+  /* Limpa tamanho, massa, recheios e decoração */
+  document
+    .querySelectorAll(
+      'input[type="radio"], input[type="checkbox"]'
+    )
+    .forEach(
+      input => {
+        input.checked = false;
+      }
+    );
+
+
+  /* Remove dados salvos no navegador */
+  localStorage.removeItem(
+    "nomeClienteBolos"
+  );
+
+  localStorage.removeItem(
+    "observacaoBolos"
+  );
+
+  localStorage.removeItem(
+    "dataEntregaBolos"
+  );
+
+  localStorage.removeItem(
+    "horarioEntregaBolos"
+  );
+
+
+  /* Atualiza a tela */
+  atualizar();
 
 }
 
@@ -1431,7 +1433,7 @@ async function enviarPedido(){
 
 
   /* =====================================================
-     MENSAGEM DO WHATSAPP
+     MENSAGEM WHATSAPP
   ===================================================== */
 
   const mensagem =
@@ -1508,7 +1510,7 @@ Gostaria de confirmar esta encomenda?`;
 
 
   /* =====================================================
-     ENVIO PARA PLANILHA
+     ENVIA PARA PLANILHA
   ===================================================== */
 
   if(
@@ -1517,12 +1519,6 @@ Gostaria de confirmar esta encomenda?`;
   ){
 
     try{
-
-      /*
-        Cache-buster:
-        evita que o navegador reutilize
-        uma requisição antiga.
-      */
 
       const urlPlanilha =
         URL_DA_PLANILHA +
@@ -1578,30 +1574,20 @@ Gostaria de confirmar esta encomenda?`;
     }`;
 
 
-  /*
-     Pequeno intervalo para garantir
-     que o navegador processe o envio.
-  */
-
-  setTimeout(
-    () => {
-
-      window.open(
-        urlWhatsApp,
-        "_blank"
-      );
-
-    },
-    300
+  window.open(
+    urlWhatsApp,
+    "_blank"
   );
 
 
   /* =====================================================
-     RESTAURA BOTÃO
+     LIMPA O FORMULÁRIO
   ===================================================== */
 
   setTimeout(
     () => {
+
+      limparPedido();
 
       btnWhatsApp.textContent =
         "📱 Encomendar pelo WhatsApp";
@@ -1609,7 +1595,7 @@ Gostaria de confirmar esta encomenda?`;
       atualizar();
 
     },
-    700
+    1000
   );
 
 }
