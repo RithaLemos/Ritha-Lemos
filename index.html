@@ -1,1264 +1,177 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
-<title>Ritha Lemos | Doces Caseiros</title>
-
-<style>
-
-:root{
-  --rosa:#c98f8a;
-  --rosa-escuro:#8f514d;
-  --vinho:#5f2926;
-  --creme:#fffaf7;
-  --bege:#f6ebe5;
-  --dourado:#c9a66b;
-  --texto:#4a3533;
-  --branco:#ffffff;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:var(--creme);
-  color:var(--texto);
-}
-
-header{
-  background:var(--branco);
-  padding:20px;
-  text-align:center;
-  border-bottom:1px solid #ead8d3;
-}
-
-header img{
-  max-width:220px;
-  max-height:110px;
-  object-fit:contain;
-}
-
-.container{
-  width:92%;
-  max-width:850px;
-  margin:25px auto 50px;
-}
-
-.titulo{
-  text-align:center;
-  color:var(--vinho);
-  margin-bottom:8px;
-}
-
-.subtitulo{
-  text-align:center;
-  margin-top:0;
-  color:#806461;
-}
-
-.card{
-  background:white;
-  border-radius:18px;
-  padding:22px;
-  margin-top:20px;
-  box-shadow:0 4px 15px rgba(95,41,38,.08);
-  border:1px solid #f0dfda;
-}
-
-.card h2{
-  margin-top:0;
-  color:var(--vinho);
-  font-size:21px;
-}
-
-.opcoes{
-  display:grid;
-  gap:12px;
-}
-
-.opcao{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:15px;
-  border:1px solid #ead8d3;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.2s;
-  background:#fff;
-}
-
-.opcao:hover{
-  border-color:var(--rosa);
-  background:#fff8f6;
-}
-
-.opcao input{
-  accent-color:var(--rosa-escuro);
-  transform:scale(1.2);
-}
-
-.opcao strong{
-  color:var(--vinho);
-}
-
-.preco{
-  margin-left:auto;
-  font-weight:bold;
-  color:var(--rosa-escuro);
-}
-
-.aviso{
-  background:#fff5ee;
-  border-left:4px solid var(--dourado);
-  padding:14px;
-  border-radius:8px;
-  margin-top:15px;
-  font-size:14px;
-}
-
-label.titulo-campo{
-  display:block;
-  font-weight:bold;
-  color:var(--vinho);
-  margin-bottom:7px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #dec9c4;
-  border-radius:10px;
-  font-size:16px;
-  font-family:inherit;
-  outline:none;
-  background:white;
-}
-
-input:focus,
-textarea:focus{
-  border-color:var(--rosa);
-  box-shadow:0 0 0 2px rgba(201,143,138,.12);
-}
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.campo{
-  margin-bottom:18px;
-}
-
-.resumo{
-  background:var(--bege);
-  border-radius:14px;
-  padding:20px;
-  margin-top:20px;
-}
-
-.resumo h3{
-  margin-top:0;
-  color:var(--vinho);
-}
-
-.linha{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  padding:6px 0;
-}
-
-.total{
-  border-top:1px solid #ddc8c2;
-  margin-top:10px;
-  padding-top:15px;
-  font-size:22px;
-  font-weight:bold;
-  color:var(--vinho);
-}
-
-.botao{
-  width:100%;
-  border:0;
-  border-radius:14px;
-  padding:17px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:20px;
-  background:var(--rosa-escuro);
-  color:white;
-  transition:.2s;
-}
-
-.botao:hover{
-  background:var(--vinho);
-}
-
-.botao:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.rodape{
-  text-align:center;
-  margin-top:30px;
-  color:#8a7470;
-  font-size:14px;
-}
-
-.obrigatorio{
-  color:#a33;
-}
-
-@media(max-width:600px){
-
-  .container{
-    width:94%;
-  }
-
-  .card{
-    padding:17px;
-  }
-
-  .linha{
-    flex-direction:column;
-    gap:3px;
-  }
-
-  .preco{
-    margin-left:0;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png" alt="Ritha Lemos - Doces Caseiros">
-</header>
-
-<div class="container">
-
-  <h1 class="titulo">Monte seu bolo 🎂</h1>
-  <p class="subtitulo">
-    Escolha o tamanho, massa, recheios e decoração.
-  </p>
-
-  <!-- TAMANHO -->
-  <div class="card">
-
-    <h2>1. Escolha o tamanho</h2>
-
-    <div class="opcoes">
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="tamanho"
-          value="15 cm"
-          data-preco="95"
-        >
-        <span>
-          <strong>15 cm</strong><br>
-          Aproximadamente 15 fatias
-        </span>
-        <span class="preco">R$ 95,00</span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="tamanho"
-          value="22 cm"
-          data-preco="195"
-        >
-        <span>
-          <strong>22 cm</strong><br>
-          Aproximadamente 22 fatias
-        </span>
-        <span class="preco">R$ 195,00</span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="tamanho"
-          value="28 cm"
-          data-preco="215"
-        >
-        <span>
-          <strong>28 cm</strong><br>
-          Aproximadamente 32 fatias
-        </span>
-        <span class="preco">R$ 215,00</span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="tamanho"
-          value="32 cm"
-          data-preco="240"
-        >
-        <span>
-          <strong>32 cm</strong><br>
-          Aproximadamente 45 fatias
-        </span>
-        <span class="preco">R$ 240,00</span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="tamanho"
-          value="40 cm retangular"
-          data-preco="280"
-        >
-        <span>
-          <strong>40 cm retangular</strong><br>
-          Aproximadamente 55 fatias
-        </span>
-        <span class="preco">R$ 280,00</span>
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- MASSA -->
-  <div class="card">
-
-    <h2>2. Escolha a massa</h2>
-
-    <div class="opcoes">
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="massa"
-          value="Chocolate"
-        >
-        <span>🍫 <strong>Chocolate</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="massa"
-          value="Baunilha"
-        >
-        <span>🍰 <strong>Baunilha</strong></span>
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- RECHEIOS -->
-  <div class="card">
-
-    <h2>3. Escolha até 2 recheios</h2>
-
-    <div class="opcoes">
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Coco/Prestígio"
-        >
-        <span><strong>Coco / Prestígio</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Morango"
-          data-extra="5"
-        >
-        <span><strong>Morango</strong></span>
-        <span class="preco">+ R$ 5,00</span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Brigadeiro ao leite"
-        >
-        <span><strong>Brigadeiro ao leite</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Brigadeiro branco"
-        >
-        <span><strong>Brigadeiro branco</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Chocolate"
-        >
-        <span><strong>Chocolate</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Dois amores"
-        >
-        <span><strong>Dois amores</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Torta mineira"
-        >
-        <span><strong>Torta mineira</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="4 leites"
-        >
-        <span><strong>4 leites</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Amendoim"
-        >
-        <span><strong>Amendoim</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="checkbox"
-          name="recheio"
-          value="Nata com morango e suspiros"
-        >
-        <span><strong>Nata com morango e suspiros</strong></span>
-      </label>
-
-    </div>
-
-    <div class="aviso">
-      Você pode escolher no máximo <strong>2 recheios</strong>.
-    </div>
-
-  </div>
-
-
-  <!-- DECORAÇÃO -->
-  <div class="card">
-
-    <h2>4. Escolha a decoração</h2>
-
-    <div class="opcoes">
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="decoracao"
-          value="Chantilly"
-        >
-        <span><strong>Chantilly</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="decoracao"
-          value="Ganache"
-        >
-        <span><strong>Ganache</strong></span>
-      </label>
-
-      <label class="opcao">
-        <input
-          type="radio"
-          name="decoracao"
-          value="Brigadeiro"
-        >
-        <span><strong>Brigadeiro</strong></span>
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- DATA E HORÁRIO -->
-  <div class="card">
-
-    <h2>5. Data e horário de retirada</h2>
-
-    <div class="campo">
-
-      <label class="titulo-campo" for="dataEntrega">
-        Data da retirada <span class="obrigatorio">*</span>
-      </label>
-
-      <input
-        type="date"
-        id="dataEntrega"
-        autocomplete="off"
-      >
-
-    </div>
-
-    <div class="campo">
-
-      <label class="titulo-campo" for="horarioEntrega">
-        Horário da retirada <span class="obrigatorio">*</span>
-      </label>
-
-      <input
-        type="time"
-        id="horarioEntrega"
-        autocomplete="off"
-      >
-
-    </div>
-
-  </div>
-
-
-  <!-- CLIENTE -->
-  <div class="card">
-
-    <h2>6. Seus dados</h2>
-
-    <div class="campo">
-
-      <label class="titulo-campo" for="nomeCliente">
-        Nome <span class="obrigatorio">*</span>
-      </label>
-
-      <input
-        type="text"
-        id="nomeCliente"
-        placeholder="Digite seu nome"
-        autocomplete="off"
-      >
-
-    </div>
-
-    <div class="campo">
-
-      <label class="titulo-campo" for="observacao">
-        Observação
-      </label>
-
-      <textarea
-        id="observacao"
-        placeholder="Alguma observação sobre o pedido?"
-        autocomplete="off"
-      ></textarea>
-
-    </div>
-
-  </div>
-
-
-  <!-- RESUMO -->
-  <div class="card">
-
-    <div class="resumo">
-
-      <h3>Resumo do pedido</h3>
-
-      <div class="linha">
-        <span>Tamanho:</span>
-        <strong id="resumoTamanho">Não selecionado</strong>
-      </div>
-
-      <div class="linha">
-        <span>Massa:</span>
-        <strong id="resumoMassa">Não selecionada</strong>
-      </div>
-
-      <div class="linha">
-        <span>Recheios:</span>
-        <strong id="resumoRecheios">Não selecionados</strong>
-      </div>
-
-      <div class="linha">
-        <span>Decoração:</span>
-        <strong id="resumoDecoracao">Não selecionada</strong>
-      </div>
-
-      <div class="linha total">
-        <span>Total:</span>
-        <strong id="resumoTotal">R$ 0,00</strong>
-      </div>
-
-    </div>
-
-
-    <div class="aviso">
-      <strong>Pagamento:</strong>
-      50% do valor é necessário para confirmar a encomenda.
-    </div>
-
-
-    <button
-      type="button"
-      class="botao"
-      id="btnWhatsApp"
-    >
-      📱 Encomendar pelo WhatsApp
-    </button>
-
-  </div>
-
-
-  <div class="rodape">
-    Ritha Lemos — Doces Caseiros<br>
-    WhatsApp: (48) 98880-1553
-  </div>
-
-</div>
-
-
-<script>
-
-const telefone = "5548988801553";
-
-const scriptURL =
-"https://script.google.com/macros/s/AKfycbxu3imiJZ0Xjo-zQa1-HZTU2WSEQMxmGbMZIqnt-6dcLWj-qS29DK8cbAdmMECyoMfb/exec";
-
-
-const nomeCliente =
-document.getElementById("nomeCliente");
-
-const observacao =
-document.getElementById("observacao");
-
-const dataEntrega =
-document.getElementById("dataEntrega");
-
-const horarioEntrega =
-document.getElementById("horarioEntrega");
-
-const btnWhatsApp =
-document.getElementById("btnWhatsApp");
-
-
-const resumoTamanho =
-document.getElementById("resumoTamanho");
-
-const resumoMassa =
-document.getElementById("resumoMassa");
-
-const resumoRecheios =
-document.getElementById("resumoRecheios");
-
-const resumoDecoracao =
-document.getElementById("resumoDecoracao");
-
-const resumoTotal =
-document.getElementById("resumoTotal");
-
-
-/* =========================
-   LOCAL STORAGE
-========================= */
-
-function salvarCampos(){
-
-  localStorage.setItem(
-    "nomeClienteBolos",
-    nomeCliente.value
-  );
-
-  localStorage.setItem(
-    "observacaoBolos",
-    observacao.value
-  );
-
-  localStorage.setItem(
-    "dataEntregaBolos",
-    dataEntrega.value
-  );
-
-  localStorage.setItem(
-    "horarioEntregaBolos",
-    horarioEntrega.value
-  );
-
-}
-
-
-/* =========================
-   CARREGAR CAMPOS
-========================= */
-
-function carregarCampos(){
-
-  nomeCliente.value =
-    localStorage.getItem("nomeClienteBolos") || "";
-
-  observacao.value =
-    localStorage.getItem("observacaoBolos") || "";
-
-  dataEntrega.value =
-    localStorage.getItem("dataEntregaBolos") || "";
-
-  horarioEntrega.value =
-    localStorage.getItem("horarioEntregaBolos") || "";
-
-}
-
-
-/* =========================
-   LIMPAR PEDIDO
-========================= */
+```javascript
+/* =====================================================
+   LIMPA OS DADOS DO PEDIDO
+===================================================== */
 
 function limparPedido(){
 
-  /* Limpa os campos de texto */
+  // Limpa os campos de texto
   nomeCliente.value = "";
   observacao.value = "";
-
-  /* Limpa data e horário */
   dataEntrega.value = "";
   horarioEntrega.value = "";
 
-  /* Limpa todas as opções */
+  // Limpa as opções selecionadas
   document
-    .querySelectorAll(
-      'input[type="radio"], input[type="checkbox"]'
-    )
-    .forEach(function(input){
-
+    .querySelectorAll('input[type="radio"], input[type="checkbox"]')
+    .forEach(input => {
       input.checked = false;
-
     });
 
-
-  /* Remove todos os dados salvos */
+  // Remove os dados salvos no navegador
   localStorage.removeItem("nomeClienteBolos");
   localStorage.removeItem("observacaoBolos");
   localStorage.removeItem("dataEntregaBolos");
   localStorage.removeItem("horarioEntregaBolos");
 
-
-  /* Garante que os campos realmente permaneçam vazios */
-  nomeCliente.setAttribute("value", "");
-  observacao.innerHTML = "";
-  dataEntrega.removeAttribute("value");
-  horarioEntrega.removeAttribute("value");
-
-
-  /* Atualiza o resumo */
+  // Atualiza a tela
   atualizar();
-
 }
 
 
-/* =========================
-   ATUALIZAR RESUMO
-========================= */
-
-function atualizar(){
-
-  const tamanhoSelecionado =
-    document.querySelector(
-      'input[name="tamanho"]:checked'
-    );
-
-  const massaSelecionada =
-    document.querySelector(
-      'input[name="massa"]:checked'
-    );
-
-  const decoracaoSelecionada =
-    document.querySelector(
-      'input[name="decoracao"]:checked'
-    );
-
-  const recheiosSelecionados =
-    Array.from(
-      document.querySelectorAll(
-        'input[name="recheio"]:checked'
-      )
-    );
-
-
-  /* Tamanho */
-
-  if(tamanhoSelecionado){
-
-    resumoTamanho.textContent =
-      tamanhoSelecionado.value;
-
-  }else{
-
-    resumoTamanho.textContent =
-      "Não selecionado";
-
-  }
-
-
-  /* Massa */
-
-  if(massaSelecionada){
-
-    resumoMassa.textContent =
-      massaSelecionada.value;
-
-  }else{
-
-    resumoMassa.textContent =
-      "Não selecionada";
-
-  }
-
-
-  /* Recheios */
-
-  if(recheiosSelecionados.length > 0){
-
-    resumoRecheios.textContent =
-      recheiosSelecionados
-        .map(item => item.value)
-        .join(" + ");
-
-  }else{
-
-    resumoRecheios.textContent =
-      "Não selecionados";
-
-  }
-
-
-  /* Decoração */
-
-  if(decoracaoSelecionada){
-
-    resumoDecoracao.textContent =
-      decoracaoSelecionada.value;
-
-  }else{
-
-    resumoDecoracao.textContent =
-      "Não selecionada";
-
-  }
-
-
-  /* TOTAL */
-
-  let total = 0;
-
-
-  if(tamanhoSelecionado){
-
-    total +=
-      Number(
-        tamanhoSelecionado.dataset.preco
-      );
-
-  }
-
-
-  recheiosSelecionados.forEach(function(recheio){
-
-    total +=
-      Number(
-        recheio.dataset.extra || 0
-      );
-
-  });
-
-
-  resumoTotal.textContent =
-    total.toLocaleString(
-      "pt-BR",
-      {
-        style:"currency",
-        currency:"BRL"
-      }
-    );
-
-
-  return total;
-
-}
-
-
-/* =========================
-   LIMITE DE 2 RECHEIOS
-========================= */
-
-document
-  .querySelectorAll(
-    'input[name="recheio"]'
-  )
-  .forEach(function(input){
-
-    input.addEventListener(
-      "change",
-      function(){
-
-        const selecionados =
-          document.querySelectorAll(
-            'input[name="recheio"]:checked'
-          );
-
-        if(selecionados.length > 2){
-
-          this.checked = false;
-
-          alert(
-            "Você pode escolher no máximo 2 recheios."
-          );
-
-        }
-
-        atualizar();
-
-      }
-    );
-
-  });
-
-
-/* =========================
-   ATUALIZAÇÃO AUTOMÁTICA
-========================= */
-
-document
-  .querySelectorAll(
-    'input[type="radio"]'
-  )
-  .forEach(function(input){
-
-    input.addEventListener(
-      "change",
-      atualizar
-    );
-
-  });
-
-
-/* =========================
-   SALVAR CAMPOS
-========================= */
-
-nomeCliente.addEventListener(
-  "input",
-  salvarCampos
-);
-
-observacao.addEventListener(
-  "input",
-  salvarCampos
-);
-
-dataEntrega.addEventListener(
-  "change",
-  salvarCampos
-);
-
-horarioEntrega.addEventListener(
-  "change",
-  salvarCampos
-);
-
-
-/* =========================
-   ENVIAR PEDIDO
-========================= */
+/* =====================================================
+   ENVIA PEDIDO
+===================================================== */
 
 async function enviarPedido(){
 
-  const tamanhoSelecionado =
-    document.querySelector(
-      'input[name="tamanho"]:checked'
-    );
+  const pedido = obterPedido();
 
-  const massaSelecionada =
-    document.querySelector(
-      'input[name="massa"]:checked'
-    );
-
-  const decoracaoSelecionada =
-    document.querySelector(
-      'input[name="decoracao"]:checked'
-    );
-
-  const recheiosSelecionados =
-    Array.from(
-      document.querySelectorAll(
-        'input[name="recheio"]:checked'
-      )
-    );
+  const nome = nomeCliente.value.trim();
+  const obs = observacao.value.trim();
+  const data = dataEntrega.value;
+  const horario = horarioEntrega.value;
 
 
-  /* VALIDAÇÕES */
+  /* =========================
+     VALIDAÇÕES
+  ========================= */
 
-  if(!tamanhoSelecionado){
+  if(!nome){
 
-    alert(
-      "Selecione o tamanho do bolo."
-    );
-
-    return;
-
-  }
-
-
-  if(!massaSelecionada){
-
-    alert(
-      "Selecione a massa do bolo."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    recheiosSelecionados.length === 0
-  ){
-
-    alert(
-      "Selecione pelo menos 1 recheio."
-    );
-
-    return;
-
-  }
-
-
-  if(!decoracaoSelecionada){
-
-    alert(
-      "Selecione a decoração."
-    );
-
-    return;
-
-  }
-
-
-  if(!dataEntrega.value){
-
-    alert(
-      "Informe a data de retirada."
-    );
-
-    dataEntrega.focus();
-
-    return;
-
-  }
-
-
-  if(!horarioEntrega.value){
-
-    alert(
-      "Informe o horário de retirada."
-    );
-
-    horarioEntrega.focus();
-
-    return;
-
-  }
-
-
-  if(
-    !nomeCliente.value.trim()
-  ){
-
-    alert(
-      "Informe seu nome."
-    );
+    alert("Digite seu nome.");
 
     nomeCliente.focus();
 
     return;
-
   }
 
 
-  /* TOTAL */
+  if(!pedido.tamanho){
 
-  const total =
-    atualizar();
+    alert("Escolha o tamanho do bolo.");
 
-
-  /* FORMATAR DATA */
-
-  let dataFormatada =
-    dataEntrega.value;
-
-  if(dataEntrega.value){
-
-    const partes =
-      dataEntrega.value.split("-");
-
-    if(partes.length === 3){
-
-      dataFormatada =
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0];
-
-    }
-
+    return;
   }
 
 
-  /* RECHEIOS */
+  if(!pedido.massa){
 
-  const recheiosTexto =
-    recheiosSelecionados
-      .map(item => item.value)
-      .join(" + ");
+    alert("Escolha a massa.");
 
-
-  /* OBSERVAÇÃO */
-
-  const observacaoTexto =
-    observacao.value.trim() ||
-    "Nenhuma";
-
-
-  /* =========================
-     MENSAGEM WHATSAPP
-  ========================= */
-
-  let mensagem =
-`🍰 *NOVO PEDIDO — RITHA LEMOS DOCES CASEIROS*
-
-👤 *Cliente:* ${nomeCliente.value.trim()}
-
-🎂 *Tamanho:* ${tamanhoSelecionado.value}
-
-🍰 *Massa:* ${massaSelecionada.value}
-
-🍓 *Recheio(s):* ${recheiosTexto}
-
-✨ *Decoração:* ${decoracaoSelecionada.value}
-
-📅 *Data de retirada:* ${dataFormatada}
-
-⏰ *Horário:* ${horarioEntrega.value}
-
-📝 *Observação:* ${observacaoTexto}
-
-💰 *TOTAL:* ${total.toLocaleString(
-  "pt-BR",
-  {
-    style:"currency",
-    currency:"BRL"
+    return;
   }
-)}
 
-💳 *Entrada para confirmação:* ${(
-  total * 0.5
-).toLocaleString(
-  "pt-BR",
-  {
-    style:"currency",
-    currency:"BRL"
+
+  if(
+    pedido.recheios.length === 0 ||
+    pedido.recheios.length > 2
+  ){
+
+    alert(
+      "Escolha 1 ou 2 sabores de recheio."
+    );
+
+    return;
   }
-)}
-
-Aguardo a confirmação da encomenda. ❤️`;
 
 
-  const urlWhatsApp =
-    "https://wa.me/" +
-    telefone +
-    "?text=" +
-    encodeURIComponent(mensagem);
+  if(!pedido.decoracao){
+
+    alert("Escolha a decoração.");
+
+    return;
+  }
 
 
-  /* =========================
+  if(!data || !horario){
+
+    alert(
+      "Selecione a data e o horário para retirada."
+    );
+
+    return;
+  }
+
+
+  /* =====================================================
+     MENSAGEM DO WHATSAPP
+  ===================================================== */
+
+  const mensagem =
+
+`*ENCOMENDA — RITHA LEMOS DOCES CASEIROS* 🎂
+
+*Cliente:* ${nome}
+
+*Bolo*
+• Tamanho: ${pedido.tamanho.value}
+• Massa: ${pedido.massa.value}
+• Recheios: ${pedido.recheios.map(r => r.value).join(" + ")}
+• Decoração: ${pedido.decoracao.value}
+• Data de Retirada: ${formatarData(data)}
+• Horário: ${horario}
+${obs ? `• Observação: ${obs}\n` : ""}
+*Total: ${dinheiro(pedido.total)}*
+
+Pagamento de 50% para confirmação da encomenda.
+
+Gostaria de confirmar esta encomenda?`;
+
+
+  /* =====================================================
      DADOS PARA PLANILHA
-  ========================= */
+  ===================================================== */
 
   const dadosPlanilha = {
 
-    nome:
-      nomeCliente.value.trim(),
+    nome: nome,
 
     tamanho:
-      tamanhoSelecionado.value,
+      pedido.tamanho.value,
 
     massa:
-      massaSelecionada.value,
+      pedido.massa.value,
 
     recheios:
-      recheiosSelecionados.map(
-        item => item.value
+      pedido.recheios.map(
+        r => r.value
       ),
 
     decoracao:
-      decoracaoSelecionada.value,
+      pedido.decoracao.value,
 
     dataEntrega:
-      dataFormatada,
+      formatarData(data),
 
     horarioEntrega:
-      horarioEntrega.value,
+      horario,
 
     observacao:
-      observacaoTexto,
+      obs,
 
     total:
-      total,
+      pedido.total,
 
     dataRegistro:
-      new Date().toLocaleString(
-        "pt-BR"
-      )
+      new Date().toLocaleString("pt-BR")
 
   };
 
 
-  /* DESABILITA BOTÃO */
+  /* =====================================================
+     BLOQUEIA BOTÃO
+  ===================================================== */
 
   btnWhatsApp.disabled = true;
 
@@ -1266,41 +179,63 @@ Aguardo a confirmação da encomenda. ❤️`;
     "⏳ Registrando pedido...";
 
 
-  /* =========================
+  /* =====================================================
      ENVIA PARA PLANILHA
-  ========================= */
+  ===================================================== */
 
-  try{
+  if(
+    URL_DA_PLANILHA &&
+    URL_DA_PLANILHA.trim() !== ""
+  ){
 
-    await fetch(
-      scriptURL,
-      {
-        method:"POST",
-        mode:"no-cors",
-        headers:{
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-        body:
-          JSON.stringify(
-            dadosPlanilha
-          )
-      }
-    );
+    try{
 
-  }catch(error){
+      const urlPlanilha =
+        URL_DA_PLANILHA +
+        "?t=" +
+        Date.now();
 
-    console.error(
-      "Erro ao registrar:",
-      error
-    );
+
+      await fetch(
+        urlPlanilha,
+        {
+          method:"POST",
+
+          mode:"no-cors",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              dadosPlanilha
+            )
+        }
+      );
+
+    }catch(erro){
+
+      console.error(
+        "Erro ao enviar para a planilha:",
+        erro
+      );
+
+    }
 
   }
 
 
-  /* =========================
+  /* =====================================================
      ABRE WHATSAPP
-  ========================= */
+  ===================================================== */
+
+  const urlWhatsApp =
+    `https://wa.me/${telefone}?text=${
+      encodeURIComponent(mensagem)
+    }`;
+
 
   window.open(
     urlWhatsApp,
@@ -1308,46 +243,23 @@ Aguardo a confirmação da encomenda. ❤️`;
   );
 
 
-  /* =========================
-     LIMPA O FORMULÁRIO
-  ========================= */
+  /* =====================================================
+     LIMPA O PEDIDO
+  ===================================================== */
 
-  setTimeout(function(){
+  setTimeout(
+    () => {
 
-    limparPedido();
+      limparPedido();
 
-    btnWhatsApp.disabled =
-      false;
+      btnWhatsApp.textContent =
+        "📱 Encomendar pelo WhatsApp";
 
-    btnWhatsApp.textContent =
-      "📱 Encomendar pelo WhatsApp";
+      atualizar();
 
-  }, 1500);
+    },
+    1000
+  );
 
 }
-
-
-/* =========================
-   BOTÃO
-========================= */
-
-btnWhatsApp.addEventListener(
-  "click",
-  enviarPedido
-);
-
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-carregarCampos();
-
-atualizar();
-
-
-</script>
-
-</body>
-</html>
 ```
