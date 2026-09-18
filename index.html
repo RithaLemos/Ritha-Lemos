@@ -1,31 +1,1343 @@
-```javascript
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#9b625c">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<title>Ritha Lemos | Doces Caseiros</title>
+
+<style>
+:root{
+  --rosa:#c98f8a;
+  --rosa-escuro:#8f514d;
+  --vinho:#5f2926;
+  --creme:#fffaf7;
+  --bege:#f6ebe5;
+  --dourado:#c9a66b;
+  --texto:#3f302e;
+  --branco:#fff;
+  --sombra:0 8px 25px rgba(95,41,38,.10);
+  --raio:18px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--texto);
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(201,143,138,.12),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 90% 30%,
+      rgba(201,166,107,.10),
+      transparent 20%
+    ),
+    var(--creme);
+}
+
+button,
+input{
+  font:inherit;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header{
+  width:100%;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+}
+
+.marca{
+  width:100%;
+}
+
+.marca img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+  width:min(1100px,100%);
+  margin:auto;
+  padding:24px 16px 100px;
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.titulo{
+  text-align:center;
+  margin:20px 0 18px;
+}
+
+.titulo h2{
+  color:var(--vinho);
+  font-family:Georgia,serif;
+  font-size:30px;
+  margin:0 0 5px;
+}
+
+.titulo p{
+  margin:0;
+  color:#765f5b;
+}
+
+/* =========================
+   ETAPAS
+========================= */
+
+.passo{
+  background:var(--branco);
+  border-radius:var(--raio);
+  box-shadow:var(--sombra);
+  padding:22px;
+  margin-bottom:18px;
+  border:1px solid rgba(143,81,77,.08);
+}
+
+.passo-topo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.numero{
+  width:36px;
+  height:36px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--rosa-escuro);
+  color:white;
+  font-weight:bold;
+}
+
+.passo h3{
+  margin:0;
+  color:var(--vinho);
+  font-family:Georgia,serif;
+  font-size:22px;
+}
+
+/* =========================
+   OPÇÕES
+========================= */
+
+.opcoes{
+  display:grid;
+  grid-template-columns:repeat(
+    auto-fit,
+    minmax(190px,1fr)
+  );
+  gap:11px;
+}
+
+.opcao{
+  position:relative;
+}
+
+.opcao input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.opcao label{
+  display:block;
+  cursor:pointer;
+  padding:14px 15px;
+  border:2px solid #eadbd6;
+  border-radius:13px;
+  background:#fffdfc;
+  transition:.2s;
+  min-height:54px;
+}
+
+.opcao label:hover{
+  border-color:var(--rosa);
+  transform:translateY(-1px);
+}
+
+.opcao input:checked + label{
+  border-color:var(--rosa-escuro);
+  background:#fff0ed;
+  box-shadow:
+    0 4px 12px rgba(143,81,77,.10);
+}
+
+.preco{
+  font-weight:bold;
+  color:var(--rosa-escuro);
+}
+
+.aviso{
+  font-size:13px;
+  color:#78625d;
+  margin:10px 0 0;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+
+.dados{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.campo label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+  color:var(--vinho);
+}
+
+.campo input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddcfcb;
+  border-radius:10px;
+  outline:none;
+  background:#fff;
+}
+
+.campo input:focus{
+  border-color:var(--rosa-escuro);
+  box-shadow:
+    0 0 0 3px rgba(201,143,138,.16);
+}
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.info{
+  margin-top:18px;
+  text-align:center;
+  color:#6d5753;
+  line-height:1.5;
+  font-size:14px;
+}
+
+/* =========================
+   RESUMO
+========================= */
+
+.resumo{
+  position:sticky;
+  bottom:12px;
+  z-index:20;
+  background:rgba(255,250,247,.96);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(143,81,77,.16);
+  box-shadow:
+    0 8px 30px rgba(63,48,46,.16);
+  border-radius:20px;
+  padding:17px;
+}
+
+.resumo-grid{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px 20px;
+  align-items:center;
+}
+
+.resumo h3{
+  margin:0 0 4px;
+  color:var(--vinho);
+}
+
+#resumoTexto{
+  font-size:14px;
+  line-height:1.45;
+  color:#66534f;
+}
+
+.total{
+  text-align:right;
+}
+
+.total small{
+  display:block;
+  color:#806a65;
+}
+
+#total{
+  color:var(--vinho);
+  font-size:25px;
+  font-weight:bold;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.btn-whatsapp{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:14px;
+  margin-top:13px;
+  background:#2e9f57;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn-whatsapp:hover{
+  filter:brightness(.95);
+  transform:translateY(-1px);
+}
+
+.btn-whatsapp:disabled{
+  background:#c8c2c0;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+  text-align:center;
+  padding:25px 16px 40px;
+  background:#f3e2dd;
+  color:#765f5b;
+}
+
+footer strong{
+  color:var(--vinho);
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:650px){
+
+  .dados{
+    grid-template-columns:1fr;
+  }
+
+  .resumo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .total{
+    text-align:left;
+  }
+
+  .passo{
+    padding:17px;
+  }
+
+  .opcoes{
+    grid-template-columns:1fr;
+  }
+
+  .titulo h2{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="marca">
+    <img
+      src="logo.png"
+      alt="Ritha Lemos — Doces Caseiros"
+    >
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="titulo">
+    <h2>Monte seu bolo</h2>
+    <p>
+      Escolha as opções abaixo e veja o valor automaticamente.
+    </p>
+  </div>
+
+
+  <!-- =========================
+       1 - TAMANHO
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">1</div>
+      <h3>Escolha o tamanho</h3>
+    </div>
+
+    <div class="opcoes">
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="tamanho"
+          id="tam15"
+          value="15 cm"
+          data-preco="95"
+        >
+
+        <label for="tam15">
+          <strong>15 cm</strong><br>
+          Rende ~15 fatias<br>
+          <span class="preco">R$ 95,00</span>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="tamanho"
+          id="tam22"
+          value="22 cm"
+          data-preco="195"
+        >
+
+        <label for="tam22">
+          <strong>22 cm</strong><br>
+          Rende ~22 fatias<br>
+          <span class="preco">R$ 195,00</span>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="tamanho"
+          id="tam28"
+          value="28 cm"
+          data-preco="215"
+        >
+
+        <label for="tam28">
+          <strong>28 cm</strong><br>
+          Rende ~32 fatias<br>
+          <span class="preco">R$ 215,00</span>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="tamanho"
+          id="tam32"
+          value="32 cm"
+          data-preco="240"
+        >
+
+        <label for="tam32">
+          <strong>32 cm</strong><br>
+          Rende ~45 fatias<br>
+          <span class="preco">R$ 240,00</span>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="tamanho"
+          id="tam40"
+          value="40 cm retangular"
+          data-preco="280"
+        >
+
+        <label for="tam40">
+          <strong>40 cm — Retangular</strong><br>
+          Rende ~55 fatias<br>
+          <span class="preco">R$ 280,00</span>
+        </label>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       2 - MASSA
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">2</div>
+      <h3>Escolha a massa</h3>
+    </div>
+
+    <div class="opcoes">
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="massa"
+          id="massaChocolate"
+          value="Chocolate"
+        >
+
+        <label for="massaChocolate">
+          🍫 <strong>Chocolate</strong>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="massa"
+          id="massaBaunilha"
+          value="Baunilha"
+        >
+
+        <label for="massaBaunilha">
+          🍰 <strong>Baunilha</strong>
+        </label>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       3 - RECHEIOS
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">3</div>
+      <h3>Escolha até 2 recheios</h3>
+    </div>
+
+    <div class="opcoes">
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r1"
+          value="Coco/Prestígio"
+        >
+        <label for="r1">
+          🥥 Coco/Prestígio
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r2"
+          value="Morango"
+          data-extra="5"
+        >
+        <label for="r2">
+          🍓 Morango
+          <span class="preco">(+ R$ 5,00)</span>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r3"
+          value="Brigadeiro ao leite"
+        >
+        <label for="r3">
+          🍫 Brigadeiro ao leite
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r4"
+          value="Brigadeiro branco"
+        >
+        <label for="r4">
+          🤍 Brigadeiro branco
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r5"
+          value="Chocolate"
+        >
+        <label for="r5">
+          🍫 Chocolate
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r6"
+          value="Dois amores"
+        >
+        <label for="r6">
+          💕 Dois amores
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r7"
+          value="Torta mineira"
+        >
+        <label for="r7">
+          🍰 Torta mineira
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r8"
+          value="4 leites"
+        >
+        <label for="r8">
+          🥛 4 leites
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r9"
+          value="Amendoim"
+        >
+        <label for="r9">
+          🥜 Amendoim
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="checkbox"
+          class="recheio"
+          id="r10"
+          value="Nata com morango e suspiros"
+        >
+        <label for="r10">
+          🍓 Nata com morango e suspiros
+        </label>
+      </div>
+
+    </div>
+
+    <p
+      class="aviso"
+      id="avisoRecheios"
+    >
+      Escolha 1 ou 2 sabores.
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       4 - DECORAÇÃO
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">4</div>
+      <h3>Escolha a decoração</h3>
+    </div>
+
+    <div class="opcoes">
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="decoracao"
+          id="d1"
+          value="Chantilly"
+        >
+
+        <label for="d1">
+          🌸 <strong>Chantilly</strong>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="decoracao"
+          id="d2"
+          value="Ganache"
+        >
+
+        <label for="d2">
+          🍫 <strong>Ganache</strong>
+        </label>
+      </div>
+
+      <div class="opcao">
+        <input
+          type="radio"
+          name="decoracao"
+          id="d3"
+          value="Brigadeiro"
+        >
+
+        <label for="d3">
+          🍫 <strong>Brigadeiro</strong>
+        </label>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       5 - RETIRADA
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">5</div>
+      <h3>Data e Horário de Retirada</h3>
+    </div>
+
+    <div class="dados">
+
+      <div class="campo">
+        <label for="dataEntrega">
+          Data da retirada *
+        </label>
+
+        <input
+          id="dataEntrega"
+          type="date"
+        >
+      </div>
+
+      <div class="campo">
+        <label for="horarioEntrega">
+          Horário estimado *
+        </label>
+
+        <input
+          id="horarioEntrega"
+          type="time"
+        >
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       6 - DADOS
+  ========================= -->
+
+  <section class="passo">
+
+    <div class="passo-topo">
+      <div class="numero">6</div>
+      <h3>Seus dados</h3>
+    </div>
+
+    <div class="dados">
+
+      <div class="campo">
+        <label for="nomeCliente">
+          Seu nome *
+        </label>
+
+        <input
+          id="nomeCliente"
+          type="text"
+          placeholder="Digite seu nome"
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="campo">
+        <label for="observacao">
+          Observação
+        </label>
+
+        <input
+          id="observacao"
+          type="text"
+          placeholder="Ex.: tema, cores ou detalhes"
+        >
+      </div>
+
+    </div>
+
+    <div class="info">
+
+      <strong>Pagamento:</strong>
+      50% para confirmação da encomenda.
+      <br>
+
+      <strong>WhatsApp:</strong>
+      (48) 98880-1553
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       RESUMO
+  ========================= -->
+
+  <section class="resumo">
+
+    <div class="resumo-grid">
+
+      <div>
+
+        <h3>Seu pedido</h3>
+
+        <div id="resumoTexto">
+          Escolha as opções acima.
+        </div>
+
+      </div>
+
+      <div class="total">
+
+        <small>Total</small>
+
+        <span id="total">
+          R$ 0,00
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="btn-whatsapp"
+      id="btnWhatsApp"
+      onclick="enviarPedido()"
+      disabled
+    >
+      📱 Encomendar pelo WhatsApp
+    </button>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <strong>
+    Ritha Lemos — Doces Caseiros
+  </strong>
+
+  <br>
+
+  Bolos feitos com carinho ♡
+
+</footer>
+
+
+<script>
+
 /* =====================================================
-   LIMPA OS DADOS DO PEDIDO
+   CONFIGURAÇÕES
+===================================================== */
+
+const telefone = "5548988801553";
+
+const URL_DA_PLANILHA =
+"https://script.google.com/macros/s/AKfycbxu3imiJZ0Xjo-zQa1-HZTU2WSEQMxmGbMZIqnt-6dcLWj-qS29DK8cbAdmMECyoMfb/exec";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const nomeCliente =
+document.getElementById("nomeCliente");
+
+const observacao =
+document.getElementById("observacao");
+
+const dataEntrega =
+document.getElementById("dataEntrega");
+
+const horarioEntrega =
+document.getElementById("horarioEntrega");
+
+const resumoTexto =
+document.getElementById("resumoTexto");
+
+const totalElemento =
+document.getElementById("total");
+
+const btnWhatsApp =
+document.getElementById("btnWhatsApp");
+
+const recheios =
+[
+  ...document.querySelectorAll(".recheio")
+];
+
+
+/* =====================================================
+   RECUPERA DADOS SALVOS
+===================================================== */
+
+nomeCliente.value =
+localStorage.getItem("nomeClienteBolos") || "";
+
+observacao.value =
+localStorage.getItem("observacaoBolos") || "";
+
+dataEntrega.value =
+localStorage.getItem("dataEntregaBolos") || "";
+
+horarioEntrega.value =
+localStorage.getItem("horarioEntregaBolos") || "";
+
+
+/* =====================================================
+   SALVA DADOS
+===================================================== */
+
+nomeCliente.addEventListener(
+  "input",
+  () => {
+
+    localStorage.setItem(
+      "nomeClienteBolos",
+      nomeCliente.value
+    );
+
+    atualizar();
+  }
+);
+
+observacao.addEventListener(
+  "input",
+  () => {
+
+    localStorage.setItem(
+      "observacaoBolos",
+      observacao.value
+    );
+
+    atualizar();
+  }
+);
+
+dataEntrega.addEventListener(
+  "input",
+  () => {
+
+    localStorage.setItem(
+      "dataEntregaBolos",
+      dataEntrega.value
+    );
+
+    atualizar();
+  }
+);
+
+horarioEntrega.addEventListener(
+  "input",
+  () => {
+
+    localStorage.setItem(
+      "horarioEntregaBolos",
+      horarioEntrega.value
+    );
+
+    atualizar();
+  }
+);
+
+
+/* =====================================================
+   LIMITA RECHEIOS A 2
+===================================================== */
+
+recheios.forEach(
+  item => {
+
+    item.addEventListener(
+      "change",
+      () => {
+
+        const selecionados =
+        recheios.filter(
+          r => r.checked
+        );
+
+        if(selecionados.length > 2){
+
+          item.checked = false;
+
+          alert(
+            "Você pode escolher no máximo 2 sabores de recheio."
+          );
+        }
+
+        atualizar();
+      }
+    );
+  }
+);
+
+
+/* =====================================================
+   ATUALIZA QUALQUER OPÇÃO
+===================================================== */
+
+document
+.querySelectorAll("input")
+.forEach(
+  input => {
+
+    input.addEventListener(
+      "change",
+      atualizar
+    );
+
+  }
+);
+
+
+/* =====================================================
+   UTILIDADES
+===================================================== */
+
+function dinheiro(valor){
+
+  return "R$ " +
+    Number(valor)
+    .toFixed(2)
+    .replace(".", ",");
+
+}
+
+
+function formatarData(dataISO){
+
+  if(!dataISO){
+    return "";
+  }
+
+  const partes =
+  dataISO.split("-");
+
+  return (
+    partes[2] +
+    "/" +
+    partes[1] +
+    "/" +
+    partes[0]
+  );
+}
+
+
+function obterRadio(nome){
+
+  return document.querySelector(
+    `input[name="${nome}"]:checked`
+  );
+}
+
+
+/* =====================================================
+   MONTA PEDIDO
+===================================================== */
+
+function obterPedido(){
+
+  const tamanho =
+  obterRadio("tamanho");
+
+  const massa =
+  obterRadio("massa");
+
+  const decoracao =
+  obterRadio("decoracao");
+
+  const recheiosSelecionados =
+  recheios.filter(
+    r => r.checked
+  );
+
+  let total =
+  tamanho
+  ? Number(tamanho.dataset.preco)
+  : 0;
+
+  recheiosSelecionados.forEach(
+    r => {
+
+      total +=
+      Number(
+        r.dataset.extra || 0
+      );
+
+    }
+  );
+
+  return {
+
+    tamanho,
+    massa,
+    decoracao,
+
+    recheios:
+    recheiosSelecionados,
+
+    total
+
+  };
+
+}
+
+
+/* =====================================================
+   ATUALIZA RESUMO
+===================================================== */
+
+function atualizar(){
+
+  const pedido =
+  obterPedido();
+
+  let linhas = [];
+
+
+  if(pedido.tamanho){
+
+    linhas.push(
+      `<strong>Tamanho:</strong> ${
+        pedido.tamanho.value
+      }`
+    );
+
+  }
+
+
+  if(pedido.massa){
+
+    linhas.push(
+      `<strong>Massa:</strong> ${
+        pedido.massa.value
+      }`
+    );
+
+  }
+
+
+  if(pedido.recheios.length){
+
+    linhas.push(
+      `<strong>Recheios:</strong> ${
+        pedido.recheios
+        .map(r => r.value)
+        .join(" + ")
+      }`
+    );
+
+  }
+
+
+  if(pedido.decoracao){
+
+    linhas.push(
+      `<strong>Decoração:</strong> ${
+        pedido.decoracao.value
+      }`
+    );
+
+  }
+
+
+  if(
+    dataEntrega.value &&
+    horarioEntrega.value
+  ){
+
+    linhas.push(
+      `<strong>Retirada:</strong> ${
+        formatarData(
+          dataEntrega.value
+        )
+      } às ${
+        horarioEntrega.value
+      }`
+    );
+
+  }
+
+
+  if(!linhas.length){
+
+    resumoTexto.innerHTML =
+      "Escolha as opções acima.";
+
+  }else{
+
+    resumoTexto.innerHTML =
+      linhas.join("<br>");
+
+  }
+
+
+  totalElemento.textContent =
+    dinheiro(pedido.total);
+
+
+  const aviso =
+  document.getElementById(
+    "avisoRecheios"
+  );
+
+  const qtdRecheios =
+  pedido.recheios.length;
+
+
+  if(qtdRecheios === 0){
+
+    aviso.textContent =
+      "Escolha 1 ou 2 sabores.";
+
+  }else if(qtdRecheios === 1){
+
+    aviso.textContent =
+      "✓ 1 sabor selecionado.";
+
+  }else{
+
+    aviso.textContent =
+      "✓ 2 sabores selecionados.";
+
+  }
+
+
+  btnWhatsApp.disabled =
+
+    !pedido.tamanho ||
+
+    !pedido.massa ||
+
+    pedido.recheios.length === 0 ||
+
+    pedido.recheios.length > 2 ||
+
+    !pedido.decoracao ||
+
+    !dataEntrega.value ||
+
+    !horarioEntrega.value ||
+
+    !nomeCliente.value.trim();
+
+}
+
+
+/* =====================================================
+   LIMPA TODOS OS DADOS DO PEDIDO
 ===================================================== */
 
 function limparPedido(){
 
-  // Limpa os campos de texto
+  /* Limpa campos */
   nomeCliente.value = "";
   observacao.value = "";
   dataEntrega.value = "";
   horarioEntrega.value = "";
 
-  // Limpa as opções selecionadas
+
+  /* Limpa tamanho, massa, recheios e decoração */
   document
-    .querySelectorAll('input[type="radio"], input[type="checkbox"]')
-    .forEach(input => {
-      input.checked = false;
-    });
+    .querySelectorAll(
+      'input[type="radio"], input[type="checkbox"]'
+    )
+    .forEach(
+      input => {
+        input.checked = false;
+      }
+    );
 
-  // Remove os dados salvos no navegador
-  localStorage.removeItem("nomeClienteBolos");
-  localStorage.removeItem("observacaoBolos");
-  localStorage.removeItem("dataEntregaBolos");
-  localStorage.removeItem("horarioEntregaBolos");
 
-  // Atualiza a tela
+  /* Remove dados salvos no navegador */
+  localStorage.removeItem(
+    "nomeClienteBolos"
+  );
+
+  localStorage.removeItem(
+    "observacaoBolos"
+  );
+
+  localStorage.removeItem(
+    "dataEntregaBolos"
+  );
+
+  localStorage.removeItem(
+    "horarioEntregaBolos"
+  );
+
+
+  /* Atualiza a tela */
   atualizar();
+
 }
 
 
@@ -35,12 +1347,20 @@ function limparPedido(){
 
 async function enviarPedido(){
 
-  const pedido = obterPedido();
+  const pedido =
+  obterPedido();
 
-  const nome = nomeCliente.value.trim();
-  const obs = observacao.value.trim();
-  const data = dataEntrega.value;
-  const horario = horarioEntrega.value;
+  const nome =
+  nomeCliente.value.trim();
+
+  const obs =
+  observacao.value.trim();
+
+  const data =
+  dataEntrega.value;
+
+  const horario =
+  horarioEntrega.value;
 
 
   /* =========================
@@ -49,7 +1369,9 @@ async function enviarPedido(){
 
   if(!nome){
 
-    alert("Digite seu nome.");
+    alert(
+      "Digite seu nome."
+    );
 
     nomeCliente.focus();
 
@@ -59,7 +1381,9 @@ async function enviarPedido(){
 
   if(!pedido.tamanho){
 
-    alert("Escolha o tamanho do bolo.");
+    alert(
+      "Escolha o tamanho do bolo."
+    );
 
     return;
   }
@@ -67,7 +1391,9 @@ async function enviarPedido(){
 
   if(!pedido.massa){
 
-    alert("Escolha a massa.");
+    alert(
+      "Escolha a massa."
+    );
 
     return;
   }
@@ -88,7 +1414,9 @@ async function enviarPedido(){
 
   if(!pedido.decoracao){
 
-    alert("Escolha a decoração.");
+    alert(
+      "Escolha a decoração."
+    );
 
     return;
   }
@@ -105,7 +1433,7 @@ async function enviarPedido(){
 
 
   /* =====================================================
-     MENSAGEM DO WHATSAPP
+     MENSAGEM WHATSAPP
   ===================================================== */
 
   const mensagem =
@@ -135,7 +1463,8 @@ Gostaria de confirmar esta encomenda?`;
 
   const dadosPlanilha = {
 
-    nome: nome,
+    nome:
+      nome,
 
     tamanho:
       pedido.tamanho.value,
@@ -164,7 +1493,8 @@ Gostaria de confirmar esta encomenda?`;
       pedido.total,
 
     dataRegistro:
-      new Date().toLocaleString("pt-BR")
+      new Date()
+      .toLocaleString("pt-BR")
 
   };
 
@@ -199,6 +1529,7 @@ Gostaria de confirmar esta encomenda?`;
       await fetch(
         urlPlanilha,
         {
+
           method:"POST",
 
           mode:"no-cors",
@@ -212,7 +1543,13 @@ Gostaria de confirmar esta encomenda?`;
             JSON.stringify(
               dadosPlanilha
             )
+
         }
+      );
+
+
+      console.log(
+        "Pedido enviado para o Google Apps Script."
       );
 
     }catch(erro){
@@ -244,7 +1581,7 @@ Gostaria de confirmar esta encomenda?`;
 
 
   /* =====================================================
-     LIMPA O PEDIDO
+     LIMPA O FORMULÁRIO
   ===================================================== */
 
   setTimeout(
@@ -262,4 +1599,16 @@ Gostaria de confirmar esta encomenda?`;
   );
 
 }
+
+
+/* =====================================================
+   INICIALIZA
+===================================================== */
+
+atualizar();
+
+</script>
+
+</body>
+</html>
 ```
