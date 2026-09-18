@@ -479,10 +479,30 @@ footer strong{color:var(--vinho)}
     </div>
   </section>
 
-  <!-- DADOS -->
+  <!-- DATA E HORÁRIO -->
   <section class="passo">
     <div class="passo-topo">
       <div class="numero">5</div>
+      <h3>Data e Horário de Retirada</h3>
+    </div>
+
+    <div class="dados">
+      <div class="campo">
+        <label for="dataEntrega">Data da retirada *</label>
+        <input id="dataEntrega" type="date">
+      </div>
+
+      <div class="campo">
+        <label for="horarioEntrega">Horário estimado *</label>
+        <input id="horarioEntrega" type="time">
+      </div>
+    </div>
+  </section>
+
+  <!-- DADOS -->
+  <section class="passo">
+    <div class="passo-topo">
+      <div class="numero">6</div>
       <h3>Seus dados</h3>
     </div>
 
@@ -545,16 +565,20 @@ const URL_DA_PLANILHA = "";
 // -----------------------------
 const nomeCliente = document.getElementById("nomeCliente");
 const observacao = document.getElementById("observacao");
+const dataEntrega = document.getElementById("dataEntrega");
+const horarioEntrega = document.getElementById("horarioEntrega");
 const resumoTexto = document.getElementById("resumoTexto");
 const totalElemento = document.getElementById("total");
 const btnWhatsApp = document.getElementById("btnWhatsApp");
 const recheios = [...document.querySelectorAll(".recheio")];
 
 // -----------------------------
-// Memória do nome e observação
+// Memória do nome, observação, data e hora
 // -----------------------------
 nomeCliente.value = localStorage.getItem("nomeClienteBolos") || "";
 observacao.value = localStorage.getItem("observacaoBolos") || "";
+dataEntrega.value = localStorage.getItem("dataEntregaBolos") || "";
+horarioEntrega.value = localStorage.getItem("horarioEntregaBolos") || "";
 
 nomeCliente.addEventListener("input", () => {
   localStorage.setItem("nomeClienteBolos", nomeCliente.value);
@@ -563,6 +587,16 @@ nomeCliente.addEventListener("input", () => {
 
 observacao.addEventListener("input", () => {
   localStorage.setItem("observacaoBolos", observacao.value);
+  atualizar();
+});
+
+dataEntrega.addEventListener("input", () => {
+  localStorage.setItem("dataEntregaBolos", dataEntrega.value);
+  atualizar();
+});
+
+horarioEntrega.addEventListener("input", () => {
+  localStorage.setItem("horarioEntregaBolos", horarioEntrega.value);
   atualizar();
 });
 
@@ -592,6 +626,12 @@ document.querySelectorAll("input").forEach(input => {
 // -----------------------------
 function dinheiro(valor){
   return "R$ " + valor.toFixed(2).replace(".", ",");
+}
+
+function formatarData(dataISO){
+  if(!dataISO) return "";
+  const partes = dataISO.split("-");
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
 function obterRadio(nome){
@@ -643,6 +683,10 @@ function atualizar(){
     linhas.push(`<strong>Decoração:</strong> ${pedido.decoracao.value}`);
   }
 
+  if(dataEntrega.value && horarioEntrega.value){
+    linhas.push(`<strong>Retirada:</strong> ${formatarData(dataEntrega.value)} às ${horarioEntrega.value}`);
+  }
+
   if(!linhas.length){
     resumoTexto.innerHTML = "Escolha as opções acima.";
   }else{
@@ -666,6 +710,8 @@ function atualizar(){
                           !pedido.massa ||
                           pedido.recheios.length !== 2 ||
                           !pedido.decoracao ||
+                          !dataEntrega.value ||
+                          !horarioEntrega.value ||
                           !nomeCliente.value.trim();
 }
 
@@ -677,6 +723,8 @@ async function enviarPedido(){
   const pedido = obterPedido();
   const nome = nomeCliente.value.trim();
   const obs = observacao.value.trim();
+  const data = dataEntrega.value;
+  const horario = horarioEntrega.value;
 
   if(!nome){
     alert("Digite seu nome.");
@@ -704,6 +752,11 @@ async function enviarPedido(){
     return;
   }
 
+  if(!data || !horario){
+    alert("Selecione a data e o horário para retirada.");
+    return;
+  }
+
   const mensagem =
 `*ENCOMENDA — RITHA LEMOS DOCES CASEIROS* 🎂
 
@@ -714,6 +767,8 @@ async function enviarPedido(){
 • Massa: ${pedido.massa.value}
 • Recheios: ${pedido.recheios.map(r => r.value).join(" + ")}
 • Decoração: ${pedido.decoracao.value}
+• Data de Retirada: ${formatarData(data)}
+• Horário: ${horario}
 ${obs ? `• Observação: ${obs}\n` : ""}
 *Total: ${dinheiro(pedido.total)}*
 
@@ -741,9 +796,11 @@ Gostaria de confirmar esta encomenda?`;
           massa:pedido.massa.value,
           recheios:pedido.recheios.map(r => r.value),
           decoracao:pedido.decoracao.value,
+          dataEntrega:formatarData(data),
+          horarioEntrega:horario,
           observacao:obs,
           total:pedido.total,
-          data:new Date().toLocaleString("pt-BR")
+          dataRegistro:new Date().toLocaleString("pt-BR")
         })
       });
     }catch(erro){
