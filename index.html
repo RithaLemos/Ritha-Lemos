@@ -40,7 +40,7 @@ body{
 
 button,input{font:inherit}
 
-/* Ajustado para a imagem ir de ponta a ponta */
+/* Imagem de ponta a ponta */
 header{
   width: 100%;
   padding: 0;
@@ -357,7 +357,7 @@ footer strong{color:var(--vinho)}
   <section class="passo">
     <div class="passo-topo">
       <div class="numero">3</div>
-      <h3>Escolha 2 recheios</h3>
+      <h3>Escolha até 2 recheios</h3>
     </div>
 
     <div class="opcoes">
@@ -373,7 +373,7 @@ footer strong{color:var(--vinho)}
       <div class="opcao"><input type="checkbox" class="recheio" id="r10" value="Nata com morango e suspiros"><label for="r10">🍓 Nata com morango e suspiros</label></div>
     </div>
 
-    <p class="aviso" id="avisoRecheios">Escolha exatamente 2 sabores.</p>
+    <p class="aviso" id="avisoRecheios">Escolha 1 ou 2 sabores.</p>
   </section>
 
   <!-- DECORAÇÃO -->
@@ -518,7 +518,7 @@ horarioEntrega.addEventListener("input", () => {
 });
 
 // -----------------------------
-// Limita os recheios a 2
+// Limita os recheios a no máximo 2
 // -----------------------------
 recheios.forEach(item => {
   item.addEventListener("change", () => {
@@ -526,7 +526,7 @@ recheios.forEach(item => {
 
     if(selecionados.length > 2){
       item.checked = false;
-      alert("Você pode escolher apenas 2 sabores de recheio.");
+      alert("Você pode escolher no máximo 2 sabores de recheio.");
     }
 
     atualizar();
@@ -616,16 +616,17 @@ function atualizar(){
   const aviso = document.getElementById("avisoRecheios");
 
   if(qtdRecheios === 0){
-    aviso.textContent = "Escolha exatamente 2 sabores.";
+    aviso.textContent = "Escolha 1 ou 2 sabores.";
   }else if(qtdRecheios === 1){
-    aviso.textContent = "Escolha mais 1 sabor.";
+    aviso.textContent = "✓ 1 sabor selecionado.";
   }else{
     aviso.textContent = "✓ 2 sabores selecionados.";
   }
 
+  // Permite ativar o botão com 1 ou 2 recheios selecionados (qtdRecheios >= 1 && qtdRecheios <= 2)
   btnWhatsApp.disabled = !pedido.tamanho ||
                           !pedido.massa ||
-                          pedido.recheios.length !== 2 ||
+                          (pedido.recheios.length === 0 || pedido.recheios.length > 2) ||
                           !pedido.decoracao ||
                           !dataEntrega.value ||
                           !horarioEntrega.value ||
@@ -659,8 +660,8 @@ async function enviarPedido(){
     return;
   }
 
-  if(pedido.recheios.length !== 2){
-    alert("Escolha exatamente 2 sabores de recheio.");
+  if(pedido.recheios.length === 0 || pedido.recheios.length > 2){
+    alert("Escolha 1 ou 2 sabores de recheio.");
     return;
   }
 
