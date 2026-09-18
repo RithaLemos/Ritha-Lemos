@@ -40,26 +40,22 @@ body{
 
 button,input{font:inherit}
 
+/* Ajustado para a imagem ir de ponta a ponta */
 header{
-  position:relative;
-  overflow:hidden;
-  text-align:center;
-  padding:20px 18px 10px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .marca{
-  position:relative;
-  z-index:1;
-  max-width:800px;
-  margin:auto;
+  width: 100%;
 }
 
 .marca img{
-  width:100%;
-  max-width:550px;
-  height:auto;
-  display:block;
-  margin:0 auto;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .container{
@@ -479,11 +475,6 @@ footer strong{color:var(--vinho)}
 <script>
 const telefone = "5548988801553";
 
-/*
-  GOOGLE SHEETS:
-  Se quiser continuar registrando os pedidos em uma planilha,
-  coloque aqui a URL do seu Google Apps Script.
-*/
 const URL_DA_PLANILHA = "";
 
 // -----------------------------
@@ -705,9 +696,6 @@ Gostaria de confirmar esta encomenda?`;
   btnWhatsApp.disabled = true;
   btnWhatsApp.textContent = "Enviando pedido...";
 
-  // -----------------------------------------
-  // Google Sheets opcional
-  // -----------------------------------------
   if(URL_DA_PLANILHA.trim() !== ""){
     try{
       await fetch(URL_DA_PLANILHA, {
