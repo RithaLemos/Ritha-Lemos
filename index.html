@@ -362,7 +362,7 @@ footer strong{color:var(--vinho)}
 
     <div class="opcoes">
       <div class="opcao"><input type="checkbox" class="recheio" id="r1" value="Coco/Prestígio"><label for="r1">🥥 Coco/Prestígio</label></div>
-      <div class="opcao"><input type="checkbox" class="recheio" id="r2" value="Morango" data-extra="10"><label for="r2">🍓 Morango <span class="preco">(+ R$ 10,00)</span></label></div>
+      <div class="opcao"><input type="checkbox" class="recheio" id="r2" value="Morango" data-extra="5"><label for="r2">🍓 Morango <span class="preco">(+ R$ 5,00)</span></label></div>
       <div class="opcao"><input type="checkbox" class="recheio" id="r3" value="Brigadeiro ao leite"><label for="r3">🍫 Brigadeiro ao leite</label></div>
       <div class="opcao"><input type="checkbox" class="recheio" id="r4" value="Brigadeiro branco"><label for="r4">🤍 Brigadeiro branco</label></div>
       <div class="opcao"><input type="checkbox" class="recheio" id="r5" value="Chocolate"><label for="r5">🍫 Chocolate</label></div>
@@ -475,7 +475,8 @@ footer strong{color:var(--vinho)}
 <script>
 const telefone = "5548988801553";
 
-const URL_DA_PLANILHA = "";
+// URL da planilha Google configurada
+const URL_DA_PLANILHA = "https://script.google.com/macros/s/AKfycbxu3imiJZ0Xjo-zQa1-HZTU2WSEQMxmGbMZIqnt-6dcLWj-qS29DK8cbAdmMECyoMfb/exec";
 
 // -----------------------------
 // Elementos
@@ -623,7 +624,7 @@ function atualizar(){
     aviso.textContent = "✓ 2 sabores selecionados.";
   }
 
-  // Permite ativar o botão com 1 ou 2 recheios selecionados (qtdRecheios >= 1 && qtdRecheios <= 2)
+  // Ativa o botão com 1 ou 2 recheios selecionados
   btnWhatsApp.disabled = !pedido.tamanho ||
                           !pedido.massa ||
                           (pedido.recheios.length === 0 || pedido.recheios.length > 2) ||
