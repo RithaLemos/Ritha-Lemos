@@ -760,6 +760,7 @@ footer strong{
         <input
           id="dataEntrega"
           type="date"
+          min=""
         >
       </div>
 
@@ -775,6 +776,10 @@ footer strong{
       </div>
 
     </div>
+
+    <p class="aviso" id="avisoPrazo">
+      As encomendas precisam ser feitas com no mínimo 48 horas de antecedência.
+    </p>
 
   </section>
 
@@ -898,6 +903,9 @@ footer strong{
 
 const telefone = "5548988801553";
 
+/* Prazo mínimo para novas encomendas */
+const PRAZO_MINIMO_HORAS = 48;
+
 const URL_DA_PLANILHA =
 "https://script.google.com/macros/s/AKfycbxu3imiJZ0Xjo-zQa1-HZTU2WSEQMxmGbMZIqnt-6dcLWj-qS29DK8cbAdmMECyoMfb/exec";
 
@@ -951,6 +959,116 @@ localStorage.getItem("horarioEntregaBolos") || "";
 
 
 /* =====================================================
+   PRAZO MÍNIMO DE RETIRADA
+===================================================== */
+
+function obterLimiteRetirada(){
+
+  return new Date(
+    Date.now() +
+    PRAZO_MINIMO_HORAS * 60 * 60 * 1000
+  );
+
+}
+
+
+function formatarDataMinima(date){
+
+  const ano =
+    date.getFullYear();
+
+  const mes =
+    String(date.getMonth() + 1)
+    .padStart(2, "0");
+
+  const dia =
+    String(date.getDate())
+    .padStart(2, "0");
+
+  return `${ano}-${mes}-${dia}`;
+
+}
+
+
+function configurarDataMinima(){
+
+  const limite =
+    obterLimiteRetirada();
+
+  dataEntrega.min =
+    formatarDataMinima(limite);
+
+  if(
+    dataEntrega.value &&
+    dataEntrega.value < dataEntrega.min
+  ){
+
+    dataEntrega.value = "";
+
+    localStorage.removeItem(
+      "dataEntregaBolos"
+    );
+
+  }
+
+}
+
+
+function obterDataHoraSelecionada(){
+
+  if(
+    !dataEntrega.value ||
+    !horarioEntrega.value
+  ){
+
+    return null;
+
+  }
+
+  const [ano, mes, dia] =
+    dataEntrega.value
+    .split("-")
+    .map(Number);
+
+  const [hora, minuto] =
+    horarioEntrega.value
+    .split(":")
+    .map(Number);
+
+  return new Date(
+    ano,
+    mes - 1,
+    dia,
+    hora,
+    minuto,
+    0,
+    0
+  );
+
+}
+
+
+function retiradaDentroDoPrazo(){
+
+  const selecionada =
+    obterDataHoraSelecionada();
+
+  if(!selecionada){
+    return true;
+  }
+
+  return (
+    selecionada.getTime() >=
+    obterLimiteRetirada().getTime()
+  );
+
+}
+
+
+configurarDataMinima();
+
+
+/* =====================================================
    SALVA DADOS
 ===================================================== */
 
@@ -983,6 +1101,8 @@ observacao.addEventListener(
 dataEntrega.addEventListener(
   "input",
   () => {
+
+    configurarDataMinima();
 
     localStorage.setItem(
       "dataEntregaBolos",
@@ -1270,6 +1390,12 @@ function atualizar(){
   }
 
 
+  const prazoOk =
+    !dataEntrega.value ||
+    !horarioEntrega.value ||
+    retiradaDentroDoPrazo();
+
+
   btnWhatsApp.disabled =
 
     !pedido.tamanho ||
@@ -1285,6 +1411,8 @@ function atualizar(){
     !dataEntrega.value ||
 
     !horarioEntrega.value ||
+
+    !prazoOk ||
 
     !nomeCliente.value.trim();
 
@@ -1426,6 +1554,18 @@ async function enviarPedido(){
     alert(
       "Selecione a data e o horário para retirada."
     );
+
+    return;
+  }
+
+
+  if(!retiradaDentroDoPrazo()){
+
+    alert(
+      `A retirada precisa ser agendada com pelo menos ${PRAZO_MINIMO_HORAS} horas de antecedência. Escolha outra data ou horário.`
+    );
+
+    horarioEntrega.focus();
 
     return;
   }
@@ -1604,10 +1744,10 @@ Gostaria de confirmar esta encomenda?`;
    INICIALIZA
 ===================================================== */
 
+configurarDataMinima();
 atualizar();
 
 </script>
 
 </body>
 </html>
-```
